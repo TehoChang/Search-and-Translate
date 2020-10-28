@@ -10,7 +10,7 @@
 
 **part: string**
 
-使用'snippet' ，會返回影片相關資訊的片段，包含描述、作者...
+使用'snippet' ，會返回影片相關資訊的片段，包含描述、作者..
 
 **maxResults: unsigned integer**
 
