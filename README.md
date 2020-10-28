@@ -1,44 +1,78 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 該項目youtube API使用說明
 
-## Available Scripts
+> **使用說明**
 
-In the project directory, you can run:
+- API的baseURL是[https://www.googleapis.com/youtube/v3](https://www.googleapis.com/youtube/v3/search)
+- 到Google Developers Console，申請一個credentials，也就是API key, 才可以使用youtube API
+- 該**項目使用 `/search`api (or/search endpoint)**
 
-### `npm start`
+> **Params介紹**
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+**part: string**
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+使用'snippet' ，會返回影片相關資訊的片段，包含描述、作者...
 
-### `npm test`
+**maxResults: unsigned integer**
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+最多返回幾個影片，有效值為0~50，默認值為5
 
-### `npm run build`
+**q: string**
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+搜尋關鍵字
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+**key: string （documentation並沒有說要加這個參數，但卻是必須的）**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+開發者申請的credential, API key
 
-### `npm run eject`
+> **api 返回數據處理**
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+返回一個response object，我們需要的video list的位置是`response.data.items`
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+將其儲存在state
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+`this.setState({video:response.data.items})`
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+設置 video 數組中的第一項作為頁面的default selectedVideo
 
-## Learn More
+`this.setState({selectedVideo:reponse.data.items[0]})`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+使用map方法遍歷videos數組，數組中的每一項是一個物件，
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+`video.id.videoId`作為list key
+
+```jsx
+const renderedList = videos.map(video => {
+    return (
+      <VideoItem
+        key={video.id.videoId}  
+        onVideoSelect={onVideoSelect} 
+        video={video}
+      />
+    );
+  });
+```
+
+**請看以下代碼，返回數據使用說明**
+
+影片名稱：video.snippet.title
+
+影片來源：video.snippet.thumbnails.medium.url
+
+影片標即：video.snippet.title
+
+```jsx
+const VideoItem = ({ video, onVideoSelect }) => {
+  return (
+    <div onClick={() => onVideoSelect(video)} className="video-item item">
+      <img
+        alt={video.snippet.title}
+        className="ui image"
+        src={video.snippet.thumbnails.medium.url}
+      /> 
+      <div className="content">
+        <div className="header">{video.snippet.title}</div>
+      </div>
+    </div>
+  );
+};
+```
