@@ -4,7 +4,7 @@ import youtube from '../apis/youtube';
 import VideoList from './VideoList';
 import VideoDetail from './VideoDetail';
 
-class App extends React.Component {
+class Video extends React.Component {
   state = { videos: [], selectedVideo: null };
 
   componentDidMount() {
@@ -30,7 +30,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="ui container">
+      <div className="ui container">        
         <SearchBar onFormSubmit={this.onTermSubmit} />
         <div className="ui grid">
           <div className="ui row">
@@ -50,7 +50,7 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default Video;
 
 
 
