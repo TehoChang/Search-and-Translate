@@ -52,7 +52,7 @@ const renderedList = videos.map(video => {
   });
 ```
 
-**請看以下代碼，返回數據使用說明**
+**以下為返回數據使用說明**
 
 影片名稱：video.snippet.title
 
