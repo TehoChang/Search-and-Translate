@@ -5,7 +5,8 @@ const VideoList = ({ videos, onVideoSelect }) => {
   const renderedList = videos.map(video => {
     return (
       <VideoItem
-        key={video.id.videoId}
+        key={video.etag} 
+        //原本是video.id.videoId，但是有些返回結果沒有這一項，只有channelId
         onVideoSelect={onVideoSelect}
         video={video}
       />

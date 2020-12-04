@@ -1,0 +1,25 @@
+.video-item {
+  display: flex !important;
+  align-items: center !important;
+  cursor: pointer;
+}
+
+.video-item.item img {
+  max-width: 230px;
+}
+
+.item-title p{
+  /* 實現多行隱藏文字 */
+  text-overflow: ellipsis;
+  max-height:40px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  white-space: normal;
+  -webkit-line-clamp: 2;
+  
+}
+p.channel-name, p.views{
+  margin:0;
+  color:grey
+}
