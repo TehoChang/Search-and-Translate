@@ -10,9 +10,6 @@ const Header = () => {
       <Link href="/wiki" className="item">
         Search on Wiki
       </Link>
-      <Link href="/dropdown" className="item">
-        Dropdown
-      </Link>
       <Link href="/translate" className="item">
         Translate
       </Link>

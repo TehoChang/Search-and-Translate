@@ -4,6 +4,6 @@ export default axios.create({
   baseURL:'https://www.googleapis.com/youtube/v3/videos',
   params:{
     part:'contentDetails,statistics',
-    key:'AIzaSyBKOvBcfCNzvxG_rswLUTVBNZHRPRrZtwg'
+    key:'AIzaSyDYctKXwkNQFBAP_FoKOP_0vpdK3IM1s8Y'
   }
 })
