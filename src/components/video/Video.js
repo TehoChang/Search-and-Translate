@@ -5,6 +5,7 @@ import VideoList from './VideoList';
 import VideoDetail from './VideoDetail';
 
 class Video extends React.Component {
+
   state = { videos: [], selectedVideo: null };
 
   componentDidMount() {
@@ -14,13 +15,13 @@ class Video extends React.Component {
   onTermSubmit = async term => {
     const response = await youtube.get('/search', {
       params:{
-        part: 'snippet',
         q:term,
+        part: 'snippet',
         maxResults: 5,
         
       }     
     });
-    console.log(response.data)
+   
     this.setState({
       videos: response.data.items,
       selectedVideo: response.data.items[0]
